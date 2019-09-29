@@ -1,0 +1,26 @@
+[
+  {
+    "product_id": "product_0001",
+    "name": "Christmas Dog",
+    "sku": "Dog",
+    "is_selected": true
+  },
+  {
+    "product_id": "product_0002",
+    "name": "Christmas GSD",
+    "sku": "Dog2",
+    "is_selected": false
+  },
+  {
+    "product_id": "product_0003",
+    "name": "Big Christmas Dog",
+    "sku": "Dog3",
+    "is_selected": true
+  },
+  {
+    "product_id": "product_0004",
+    "name": "Big Christmas GSD",
+    "sku": "Dog4",
+    "is_selected": false
+  }
+]

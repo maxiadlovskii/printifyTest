@@ -1,0 +1,13 @@
+<div class="orders">
+    <header class="header">
+        <h1>Orders</h1>
+        <ui-button [text]="'Import Orders'" (onClick)="onImportOrders()"
+        ></ui-button>
+    </header>
+    <ui-table
+            [dataSource]="tableSource"
+            [displayedColumns]="tableColumns"
+            class="mat-elevation-z8"
+    >
+    </ui-table>
+</div>

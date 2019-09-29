@@ -1,0 +1,26 @@
+[
+  {
+    "order_id": "order_0001",
+    "customer":  "Jan",
+    "date_created":  "01/01/2019",
+    "revenue":  "+5",
+    "sost":  "-15",
+    "price":  "11",
+    "fulfilment": "In production",
+    "amount_of_products": 2,
+    "order_volume":  54,
+    "sku": "SOME title"
+  },
+  {
+    "order_id": "order_0002",
+    "customer":  "Kyle",
+    "date_created":  "02/01/2019",
+    "revenue":  "+9",
+    "sost":  "-10",
+    "price":  "119",
+    "fulfilment": "In production",
+    "amount_of_products": 3,
+    "order_volume":  58,
+    "sku": "SOME title"
+  }
+]
