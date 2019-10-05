@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
-import {MatTableModule} from "@angular/material";
 import {BrowserModule} from "@angular/platform-browser";
 import { OrdersContainer } from '../components/containers/Orders/orders.component'
+import { ImportOrdersComponent } from '../components/containers/ImportOrders/import-orders.component'
 import {ViewModule} from "./view.module";
 
 @NgModule({
@@ -10,10 +10,15 @@ import {ViewModule} from "./view.module";
         ViewModule
     ],
     exports: [
-        OrdersContainer
+        OrdersContainer,
+        ImportOrdersComponent
     ],
     declarations: [
-        OrdersContainer
+        OrdersContainer,
+        ImportOrdersComponent
+    ],
+    entryComponents: [
+        ImportOrdersComponent
     ]
 })
 

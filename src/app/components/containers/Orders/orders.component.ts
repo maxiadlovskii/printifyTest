@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { OrdersService } from "../../../services/orders.service";
 import { ordersModel } from "../../../constants/beModels.js"
+import { ImportOrdersComponent } from '../ImportOrders/import-orders.component'
 
 interface OrdersCollection {
     [ordersModel.ID]: string,
@@ -21,7 +22,9 @@ interface OrdersCollection {
     templateUrl: './orders.component.html'
 })
 export class OrdersContainer implements OnInit{
-    ordersCollection: OrdersCollection = [];
+    ordersCollection = [];
+    isImportOrdersOpen: boolean = false;
+    ImportOrdersModalContent = ImportOrdersComponent;
     ordersColumns = [
         {
             id: ordersModel.ID,
@@ -64,7 +67,10 @@ export class OrdersContainer implements OnInit{
          )
     };
 
-    onImportOrders() {
-        console.log('onImportOrders')
+    onImportOrders = () => {
+        this.isImportOrdersOpen = true;
+    }
+    afterImportOrdersClose = () => {
+        this.isImportOrdersOpen = false;
     }
 }

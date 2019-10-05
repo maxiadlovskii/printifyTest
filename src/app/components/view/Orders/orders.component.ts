@@ -9,4 +9,7 @@ export class OrdersView {
     @Input() tableSource;
     @Input() tableColumns;
     @Input() onImportOrders;
+    @Input() isImportOrdersOpen;
+    @Input() ImportOrdersModalContent;
+    @Input() afterImportOrdersClose;
 }

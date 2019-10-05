@@ -10,4 +10,10 @@
             class="mat-elevation-z8"
     >
     </ui-table>
+    <ui-modal
+        [isOpen]="isImportOrdersOpen"
+        [ModalContent]="ImportOrdersModalContent"
+        [afterClosed]="afterImportOrdersClose"
+    >
+    </ui-modal>
 </div>
