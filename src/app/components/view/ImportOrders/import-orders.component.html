@@ -1,0 +1,29 @@
+<div class="wrapper">
+    <mat-horizontal-stepper [linear] = "true" #stepper>
+        <mat-step [completed]="firstIsCompleted">
+            <ng-template matStepLabel>Find order</ng-template>
+            <ui-input [placeholder]="'Find order'"  (onChange)="onSearch($event)"></ui-input>
+            <ui-table
+                    [dataSource]="tableData"
+                    [displayedColumns]="ordersColumns"
+                    [additionClasses]="['order-table']"
+                    [onRowClick]="onOrderClick"
+            >
+            </ui-table>
+        </mat-step>
+        <mat-step [completed]="secondIsCompleted">
+            <ng-template matStepLabel>Prepare products</ng-template>
+            <div>
+                <ui-button [text]="'Back'" (onClick)="onBackButtonClick()"></ui-button>
+                <ui-button [text]="'Next'" (onClick)="onNextButtonClick()"></ui-button>
+            </div>
+        </mat-step>
+        <mat-step [completed]="thirdIsCompleted">
+            <ng-template matStepLabel>Confirm Order</ng-template>
+            <div>
+                <ui-button [text]="'Back'" (onClick)="onBackButtonClick()"></ui-button>
+                <ui-button [text]="'Next'" (onClick)="onNextButtonClick()"></ui-button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

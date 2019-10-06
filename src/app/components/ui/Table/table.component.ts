@@ -7,7 +7,16 @@ import {Component, Input, OnInit} from '@angular/core';
 export class TableComponent implements OnInit {
     @Input() displayedColumns;
     @Input() dataSource;
+    @Input() onRowClick;
+    @Input() additionClasses: [] = [];
+    get rowClass(){
+        const defaultClass = 'row';
+        return [defaultClass, ...this.additionClasses];
+    }
     columnsId;
+    handleRowClick = row => {
+        this.onRowClick && this.onRowClick(row)
+    }
     ngOnInit() {
         console.log({ displayedColumns: this.displayedColumns, dataSource: this.dataSource})
         this.columnsId = this.displayedColumns.map(({id}) => id)

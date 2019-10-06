@@ -6,23 +6,33 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from '../components/ui/Modal/modal.component'
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { InputComponent } from '../components/ui/Input/input.component'
+import {MatInputModule} from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
     imports: [
         MatTableModule,
         MatButtonModule,
         MatDialogModule,
-        BrowserModule
+        BrowserModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatStepperModule
     ],
     exports: [
+        MatStepperModule,
         TableComponent,
         ButtonComponent,
-        ModalComponent
+        ModalComponent,
+        InputComponent
     ],
     declarations: [
         TableComponent,
         ButtonComponent,
-        ModalComponent
+        ModalComponent,
+        InputComponent
     ]
 })
 

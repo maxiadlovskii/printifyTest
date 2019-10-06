@@ -1,1 +1,13 @@
 <div>Modal Content</div>
+<view-import-orders
+    [onSearch]="onSearch"
+    [tableData]="filtratedOrdersCollection"
+    [ordersColumns]="ordersColumns"
+    [onBackButtonClick]="onBackButtonClick"
+    [onNextButtonClick]="onNextButtonClick"
+    [firstIsCompleted]="firstIsCompleted"
+    [secondIsCompleted]="secondIsCompleted"
+    [thirdIsCompleted]="thirdIsCompleted"
+    [onOrderClick]="onOrderClick"
+    #viewImportOrders
+></view-import-orders>
