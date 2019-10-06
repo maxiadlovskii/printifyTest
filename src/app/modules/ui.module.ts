@@ -10,6 +10,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { InputComponent } from '../components/ui/Input/input.component'
 import {MatInputModule} from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatListModule} from '@angular/material/list';
+import { CheckboxListComponent } from '../components/ui/CheckBoxList/checkbox-list.component'
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatChipsModule} from '@angular/material/chips';
+import { ChipsListComponent } from '../components/ui/ChipsList/chips-list.component'
 
 @NgModule({
     imports: [
@@ -19,20 +25,30 @@ import { MatStepperModule } from '@angular/material/stepper';
         BrowserModule,
         MatFormFieldModule,
         MatInputModule,
-        MatStepperModule
+        MatStepperModule,
+        MatExpansionModule,
+        MatPaginatorModule,
+        MatChipsModule,
+        MatListModule
     ],
     exports: [
         MatStepperModule,
+        MatExpansionModule,
         TableComponent,
         ButtonComponent,
         ModalComponent,
-        InputComponent
+        InputComponent,
+        CheckboxListComponent,
+        MatListModule,
+        ChipsListComponent
     ],
     declarations: [
         TableComponent,
         ButtonComponent,
         ModalComponent,
-        InputComponent
+        InputComponent,
+        CheckboxListComponent,
+        ChipsListComponent
     ]
 })
 

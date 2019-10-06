@@ -2,7 +2,7 @@
         [tableSource]="ordersCollection"
         [tableColumns]="ordersColumns"
         [onImportOrders]="onImportOrders"
-        [isImportOrdersOpen]="isImportOrdersOpen"
+        [isImportOrdersOpen]="ordersService.importOrdersIsOpen"
         [afterImportOrdersClose]="afterImportOrdersClose"
         [ImportOrdersModalContent]="ImportOrdersModalContent"
 ></view-orders>

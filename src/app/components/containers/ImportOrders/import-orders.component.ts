@@ -1,7 +1,11 @@
-import {Component, OnInit, Injectable, ViewChild, Input} from '@angular/core';
-import {OrdersService} from "../../../services/orders.service";
-import {ordersModel} from "../../../constants/beModels";
+import {
+    Component, OnInit, Injectable, ViewChild
+} from '@angular/core';
+import { stepTypes } from '../../../constants'
+import { OrdersService } from "../../../services/orders.service";
+import {ordersModel, productsModel, productTypesModel} from "../../../constants/beModels";
 import { ImportOrdersComponent as ImportOrdersComponentView } from "../../view/ImportOrders/import-orders.component";
+import {optionCreator} from "../../../utils";
 
 @Component({
     selector: 'container-import-orders',
@@ -13,9 +17,37 @@ export class ImportOrdersComponent implements OnInit{
     orderFilterValue = '';
     productFilterValue = '';
     ordersCollection: {}[] = [];
+    productsCollection: {}[] = [];
+    productTypesCollection: {}[]= [];
     selectedOrder: {} = {};
+    selectedProduct: {} = {};
+    selectedProductTypes: [] = [];
+    currentStep: Number = 0;
     get filtratedOrdersCollection(){
        return this.ordersCollection.filter(order => order[ordersModel.ID].toString().includes(this.orderFilterValue))
+    }
+    get filtratedProductsCollection(){
+        return this.productsCollection.filter(product => product[productsModel.NAME].toLowerCase().includes(this.productFilterValue.toLowerCase()))
+    }
+    get showButtons(){
+        return this.currentStep !== stepTypes.SELECT_ORDER
+    }
+    get showNextButton() {
+        return ![stepTypes.SELECT_PRODUCT, stepTypes.CONFIRM_ORDER].includes(Number(this.currentStep))
+    }
+    get showFinishButton() {
+        return this.currentStep === stepTypes.CONFIRM_ORDER
+    }
+    get disabledNextButton() {
+        return this.currentStep === stepTypes.PREPARE_PRODUCTS && !this.selectedProductTypes.length
+    }
+    get chipsContent() {
+        const def = [
+            'My Orders',
+            this.selectedOrder[ordersModel.ID],
+            this.selectedProduct[productsModel.NAME]
+        ]
+        return def.slice(0, Number(this.currentStep)+1)
     }
     ordersColumns = [
         {
@@ -31,34 +63,79 @@ export class ImportOrdersComponent implements OnInit{
             title: "SOST"
         }
     ];
-    firstIsCompleted: boolean = true;
-
-    get secondIsCompleted(){
-        return false;
-    };
-    get thirdIsCompleted(){
-        return false;
-    };
+    productsColumns = [
+        {
+            id: productsModel.ID,
+            title: "#"
+        },
+        {
+            id: productsModel.NAME,
+            title: "PRODUCT NAME"
+        },
+        {
+            id: productsModel.IS_SELECTED,
+            title: "IS SELECTED"
+        }
+    ];
 
     constructor(
         private ordersService: OrdersService
     ) { }
-    onSearch = value => {
+    onStepChanged = ({ nextStep }) => {
+        const getData = {
+            [stepTypes.SELECT_PRODUCT]: async () => {
+                await this.ordersService.getProducts().subscribe(
+                    data => {
+                        this.productsCollection = data;
+                    }
+                )
+            },
+            [stepTypes.PREPARE_PRODUCTS]: async () => {
+            await this.ordersService.getProductTypes().subscribe(
+                data => {
+                    this.productTypesCollection = optionCreator({
+                        list: data,
+                        idKey: productTypesModel.ID,
+                        textKey: productTypesModel.NAME
+                    });
+                }
+            )
+        }
+        };
+        getData[nextStep] && getData[nextStep]()
+    };
+    setCurrentStep({ prevStep, nextStep }){
+        this.currentStep = nextStep;
+        this.onStepChanged({ prevStep, nextStep })
+    }
+    onSearchOrder = value => {
         this.orderFilterValue = value;
     };
-    onNextButtonClick() {
-        console.log('onNextButtonClick', this.importOrdersView.nextStep);
-        this.importOrdersView.nextStep()
+    onSearchProduct = value => {
+        this.productFilterValue = value;
     };
-    onBackButtonClick = () => {
-        this.importOrdersView.prevStep()
+    onNextStep = ()=>{
+        const { prevStep, nextStep } = this.importOrdersView.nextStep();
+        this.setCurrentStep({ prevStep, nextStep });
+    };
+    onBackStep = () => {
+        const { prevStep, nextStep } = this.importOrdersView.prevStep();
+        this.setCurrentStep({ prevStep, nextStep });
     };
     onOrderClick = order => {
-        console.log(order)
         this.selectedOrder = order;
-        this.firstIsCompleted = true;
-        this.onNextButtonClick()
+        return this.onNextStep()
     };
+    onProductClick = product => {
+        this.selectedProduct = product;
+        return this.onNextStep()
+    };
+    prepareProductsChange = selected => {
+        this.selectedProductTypes = selected;
+    };
+    onFinishButtonClick = () => {
+        this.ordersService.setImportOrders(false)
+    }
     async ngOnInit() {
         await this.ordersService.getOrders().subscribe(
             data => {
@@ -66,5 +143,6 @@ export class ImportOrdersComponent implements OnInit{
             }
         )
     };
+
 
 }

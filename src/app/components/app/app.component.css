@@ -8,6 +8,11 @@ p {
   width: 100%;
   padding: 20px;
 }
+
+/*this is for disable step header i ui*/
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that

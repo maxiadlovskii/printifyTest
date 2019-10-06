@@ -22,16 +22,20 @@ export class ModalComponent implements OnChanges {
     openDialog() {
         const dialogRef = this.dialog.open(this.ModalContent);
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
             this.afterClosed()
         });
     }
 
+    closeDialog() {
+        this.dialog.closeAll()
+    }
+
     ngOnChanges(changes) {
         const isOpen =  changes.isOpen.currentValue;
-        console.log(changes);
         if(isOpen){
             this.openDialog()
+        } else {
+            this.closeDialog()
         }
         // changes.prop contains the old and the new value...
     }

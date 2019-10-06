@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div>
+    <ui-input [placeholder]="'Find product by name'"  (onChange)="onSearchProduct($event)"></ui-input>
+    <ui-table
+            [dataSource]="productTableData"
+            [displayedColumns]="productsColumns"
+            [additionClasses]="['selectable-row']"
+            [onRowClick]="onProductClick"
+            [showHeader]="false"
+    >
+    </ui-table>
+    </div>
+</div>

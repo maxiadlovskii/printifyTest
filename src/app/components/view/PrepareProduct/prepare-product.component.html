@@ -1,0 +1,18 @@
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <ui-table
+                    class="table"
+                    [dataSource]="[selectedProduct]"
+                    [displayedColumns]="productsColumns"
+                    [showHeader]="false"
+            >
+            </ui-table>
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ui-checkbox-list
+            [itemsList]="productTypesCollection"
+            (onChange)="prepareProductsChange($event)"
+    >
+    </ui-checkbox-list>
+</mat-expansion-panel>

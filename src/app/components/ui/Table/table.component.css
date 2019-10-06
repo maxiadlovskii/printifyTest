@@ -2,6 +2,14 @@
     width: 100%;
 }
 
-.order-table {
+.selectable-row {
     cursor: pointer;
+
+}
+.selectable-row:hover {
+    background-color: #BDBDBD;
+}
+
+.withoutHeader {
+    display: none;
 }

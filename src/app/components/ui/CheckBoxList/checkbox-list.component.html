@@ -1,0 +1,8 @@
+<mat-selection-list
+    #pizzaList
+    (selectionChange)="onChangeSelection($event)"
+>
+    <mat-list-option *ngFor="let item of itemsList" [value]="item">
+        {{item.sex}} | {{item.text}}
+    </mat-list-option>
+</mat-selection-list>

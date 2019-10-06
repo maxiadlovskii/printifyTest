@@ -9,6 +9,8 @@ export class TableComponent implements OnInit {
     @Input() dataSource;
     @Input() onRowClick;
     @Input() additionClasses: [] = [];
+    @Input() showHeader: boolean = true;
+
     get rowClass(){
         const defaultClass = 'row';
         return [defaultClass, ...this.additionClasses];
@@ -18,7 +20,6 @@ export class TableComponent implements OnInit {
         this.onRowClick && this.onRowClick(row)
     }
     ngOnInit() {
-        console.log({ displayedColumns: this.displayedColumns, dataSource: this.dataSource})
         this.columnsId = this.displayedColumns.map(({id}) => id)
     }
 }

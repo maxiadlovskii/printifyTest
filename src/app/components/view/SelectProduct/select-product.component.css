@@ -1,6 +1,5 @@
 .wrapper {
-    min-width: 600px;
-    min-height: 500px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -8,4 +7,5 @@
 
 .buttons {
     align-self: flex-end;
+    padding: 10px 0;
 }

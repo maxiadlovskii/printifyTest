@@ -8,24 +8,22 @@ import { MAIN_API } from '../constants/apiUrl.js'
 })
 
 export class OrdersService {
-    items = [];
-
+    public importOrdersIsOpen = false;
     constructor(
         private http: HttpClient
     ) {}
-
-    addToCart(product) {
-        this.items.push(product);
-    }
-
-    getItems() {
-        return this.items;
+    public setImportOrders(state) {
+        this.importOrdersIsOpen = state
     }
     public getOrders(): Observable<Object>{
         return this.http.get(`${MAIN_API}orders.json`);
     }
-    clearCart() {
-        this.items = [];
-        return this.items;
+
+    public getProducts(): Observable<Object>{
+        return this.http.get(`${MAIN_API}products.json`);
     }
+    public getProductTypes(): Observable<Object>{
+        return this.http.get(`${MAIN_API}productTypes.json`);
+    }
+
 }

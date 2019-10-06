@@ -23,7 +23,7 @@ interface OrdersCollection {
 })
 export class OrdersContainer implements OnInit{
     ordersCollection = [];
-    isImportOrdersOpen: boolean = false;
+    isImportOrdersOpen = false;
     ImportOrdersModalContent = ImportOrdersComponent;
     ordersColumns = [
         {
@@ -65,12 +65,13 @@ export class OrdersContainer implements OnInit{
                  this.ordersCollection = data;
              }
          )
+        this.isImportOrdersOpen = this.ordersService.importOrdersIsOpen
     };
 
     onImportOrders = () => {
-        this.isImportOrdersOpen = true;
-    }
+        this.ordersService.setImportOrders(true)
+    };
     afterImportOrdersClose = () => {
-        this.isImportOrdersOpen = false;
+        this.ordersService.setImportOrders(false)
     }
 }

@@ -1,0 +1,10 @@
+<div class="wrapper">
+    <ui-input [placeholder]="'Find order by #'"  (onChange)="onSearchOrder($event)"></ui-input>
+    <ui-table
+            [dataSource]="tableData"
+            [displayedColumns]="ordersColumns"
+            [additionClasses]="['selectable-row']"
+            [onRowClick]="onOrderClick"
+    >
+    </ui-table>
+</div>

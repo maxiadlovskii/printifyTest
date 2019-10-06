@@ -1,29 +1,50 @@
 <div class="wrapper">
     <mat-horizontal-stepper [linear] = "true" #stepper>
-        <mat-step [completed]="firstIsCompleted">
-            <ng-template matStepLabel>Find order</ng-template>
-            <ui-input [placeholder]="'Find order'"  (onChange)="onSearch($event)"></ui-input>
-            <ui-table
-                    [dataSource]="tableData"
-                    [displayedColumns]="ordersColumns"
-                    [additionClasses]="['order-table']"
-                    [onRowClick]="onOrderClick"
+        <mat-step>
+            <ng-template matStepLabel>Select order</ng-template>
+            <ui-chips-list [list]="chipsContent"></ui-chips-list>
+            <view-select-order
+                [onSearchOrder]="onSearchOrder"
+                [tableData]="tableData"
+                [ordersColumns]="ordersColumns"
+                [onOrderClick]="onOrderClick"
+                >
+            </view-select-order>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Select product</ng-template>
+            <ui-chips-list [list]="chipsContent"></ui-chips-list>
+            <view-select-product
+                [onProductClick]="onProductClick"
+                [productsColumns]="productsColumns"
+                [onSearchProduct]="onSearchProduct"
+                [productTableData]="productTableData"
+                [onNextButtonClick]="onNextButtonClick"
             >
-            </ui-table>
+            </view-select-product>
         </mat-step>
-        <mat-step [completed]="secondIsCompleted">
+        <mat-step>
             <ng-template matStepLabel>Prepare products</ng-template>
-            <div>
-                <ui-button [text]="'Back'" (onClick)="onBackButtonClick()"></ui-button>
-                <ui-button [text]="'Next'" (onClick)="onNextButtonClick()"></ui-button>
-            </div>
+            <ui-chips-list [list]="chipsContent"></ui-chips-list>
+            <view-prepare-product
+                    [selectedProduct]="selectedProduct"
+                    [productsColumns]="productsColumns"
+                    [productTypesCollection]="productTypesCollection"
+                    [prepareProductsChange]="prepareProductsChange"
+            >
+            </view-prepare-product>
         </mat-step>
-        <mat-step [completed]="thirdIsCompleted">
+        <mat-step>
             <ng-template matStepLabel>Confirm Order</ng-template>
-            <div>
-                <ui-button [text]="'Back'" (onClick)="onBackButtonClick()"></ui-button>
-                <ui-button [text]="'Next'" (onClick)="onNextButtonClick()"></ui-button>
-            </div>
+            <ui-chips-list [list]="chipsContent"></ui-chips-list>
+            <view-confirm-order
+                    [selectedProductTypes]="selectedProductTypes"
+            ></view-confirm-order>
         </mat-step>
     </mat-horizontal-stepper>
+    <div *ngIf="showButtons" class="buttons">
+        <ui-button [text]="backButtonText" (onClick)="onBackButtonClick()"></ui-button>
+        <ui-button *ngIf="showNextButton" [disabled]="disabledNextButton" [text]="nextButtonText" (onClick)="onNextButtonClick()"></ui-button>
+        <ui-button *ngIf="showFinishButton" [text]="finishButtonText" (onClick)="onFinishButtonClick()"></ui-button>
+    </div>
 </div>

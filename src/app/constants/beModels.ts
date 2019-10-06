@@ -11,14 +11,14 @@ export const ordersModel = {
     SKU: 'sku'
 };
 
-export const products = {
+export const productsModel = {
     ID: 'product_id',
     NAME: 'name',
     SKU: 'sku',
     IS_SELECTED: 'is_selected'
 }
 
-export const productVariant = {
-    ID: 'variant_id',
-    NAME: 'SKU'
+export const productTypesModel = {
+    ID: 'id',
+    NAME: 'name'
 }
