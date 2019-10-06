@@ -1,4 +1,4 @@
-# Printify printify frontend homework
+# Printify frontend homework
 
 
 ## Install
