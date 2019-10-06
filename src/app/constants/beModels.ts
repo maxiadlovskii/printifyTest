@@ -16,9 +16,9 @@ export const productsModel = {
     NAME: 'name',
     SKU: 'sku',
     IS_SELECTED: 'is_selected'
-}
+};
 
 export const productTypesModel = {
     ID: 'id',
     NAME: 'name'
-}
+};

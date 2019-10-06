@@ -16,8 +16,8 @@ export class ImportOrdersComponent implements OnInit{
     @ViewChild('viewImportOrders', {static: false}) private importOrdersView: ImportOrdersComponentView;
     orderFilterValue = '';
     productFilterValue = '';
-    ordersCollection: {}[] = [];
-    productsCollection: {}[] = [];
+    ordersCollection: {}[]= [];
+    productsCollection: {}[]= [];
     productTypesCollection: {}[]= [];
     selectedOrder: {} = {};
     selectedProduct: {} = {};
@@ -46,7 +46,7 @@ export class ImportOrdersComponent implements OnInit{
             'My Orders',
             this.selectedOrder[ordersModel.ID],
             this.selectedProduct[productsModel.NAME]
-        ]
+        ];
         return def.slice(0, Number(this.currentStep)+1)
     }
     ordersColumns = [
@@ -85,16 +85,16 @@ export class ImportOrdersComponent implements OnInit{
         const getData = {
             [stepTypes.SELECT_PRODUCT]: async () => {
                 await this.ordersService.getProducts().subscribe(
-                    data => {
-                        this.productsCollection = data;
+                    response => {
+                        this.productsCollection = response['data'];
                     }
                 )
             },
             [stepTypes.PREPARE_PRODUCTS]: async () => {
             await this.ordersService.getProductTypes().subscribe(
-                data => {
+                response => {
                     this.productTypesCollection = optionCreator({
-                        list: data,
+                        list: response['data'],
                         idKey: productTypesModel.ID,
                         textKey: productTypesModel.NAME
                     });
@@ -106,7 +106,7 @@ export class ImportOrdersComponent implements OnInit{
     };
     setCurrentStep({ prevStep, nextStep }){
         this.currentStep = nextStep;
-        this.onStepChanged({ prevStep, nextStep })
+        this.onStepChanged({nextStep })
     }
     onSearchOrder = value => {
         this.orderFilterValue = value;
@@ -135,11 +135,11 @@ export class ImportOrdersComponent implements OnInit{
     };
     onFinishButtonClick = () => {
         this.ordersService.setImportOrders(false)
-    }
+    };
     async ngOnInit() {
         await this.ordersService.getOrders().subscribe(
-            data => {
-                this.ordersCollection = data;
+            response => {
+                this.ordersCollection = response['data'];
             }
         )
     };

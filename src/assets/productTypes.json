@@ -1,27 +1,29 @@
-[
-  {
-    "id": 1,
-    "name": "XXL",
-    "sex": "male"
-  },
-  {
-    "id": 2,
-    "name": "XL",
-    "sex": "male"
-  },
-  {
-    "id": 3,
-    "name": "L",
-    "sex": "male"
-  },
-  {
-    "id": 4,
-    "name": "M",
-    "sex": "female"
-  },
-  {
-    "id": 5,
-    "name": "S",
-    "sex": "male"
-  }
-]
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "XXL",
+      "sex": "male"
+    },
+    {
+      "id": 2,
+      "name": "XL",
+      "sex": "male"
+    },
+    {
+      "id": 3,
+      "name": "L",
+      "sex": "male"
+    },
+    {
+      "id": 4,
+      "name": "M",
+      "sex": "female"
+    },
+    {
+      "id": 5,
+      "name": "S",
+      "sex": "male"
+    }
+  ]
+}

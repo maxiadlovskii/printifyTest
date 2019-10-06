@@ -1,28 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import { OrdersService } from "../../../services/orders.service";
-import { ordersModel } from "../../../constants/beModels.js"
+import { ordersModel } from "../../../constants/beModels"
 import { ImportOrdersComponent } from '../ImportOrders/import-orders.component'
-
-interface OrdersCollection {
-    [ordersModel.ID]: string,
-    [ordersModel.CUSTOMER]: string,
-    [ordersModel.DATE_CREATED]: string,
-    [ordersModel.REVENUE]: string,
-    [ordersModel.SOST]: string,
-    [ordersModel.PRICE]: string,
-    [ordersModel.FULFILMENT]: string,
-    [ordersModel.AMOUNT_OF_PRODUCTS]: number,
-    [ordersModel.ORDER_VOLUME]: number,
-    [ordersModel.SKU]: string
-}
-
 
 @Component({
     selector: 'container-orders',
     templateUrl: './orders.component.html'
 })
 export class OrdersContainer implements OnInit{
-    ordersCollection = [];
+    ordersCollection: {}[]= [];
     isImportOrdersOpen = false;
     ImportOrdersModalContent = ImportOrdersComponent;
     ordersColumns = [
@@ -61,10 +47,10 @@ export class OrdersContainer implements OnInit{
 
     async ngOnInit() {
          await this.ordersService.getOrders().subscribe(
-             data => {
-                 this.ordersCollection = data;
+             response => {
+                 this.ordersCollection = response['data'];
              }
-         )
+         );
         this.isImportOrdersOpen = this.ordersService.importOrdersIsOpen
     };
 
